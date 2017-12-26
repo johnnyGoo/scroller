@@ -13,7 +13,6 @@
  */
 
 var Scroller;
-
 (function() {
 	var NOOP = function(){};
 
@@ -21,6 +20,7 @@ var Scroller;
 	 * A pure logic 'component' for 'virtual' scrolling/zooming.
 	 */
 	Scroller = function(callback, options) {
+
 
 		this.__callback = callback;
 
@@ -1353,3 +1353,4 @@ var Scroller;
 	}
 
 })();
+window.Scroller = module.exports = Scroller;

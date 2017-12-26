@@ -1,4 +1,4 @@
-var EasyScroller = function(content, options) {
+var EasyScroller = function(content, options,animate) {
 	
 	this.content = content;
 	this.container = content.parentNode;
@@ -8,7 +8,7 @@ var EasyScroller = function(content, options) {
 	var that = this;
 	this.scroller = new Scroller(function(left, top, zoom) {
 		that.render(left, top, zoom);
-	}, options);
+	}, options,animate);
 
 	// bind events
 	this.bindEvents();

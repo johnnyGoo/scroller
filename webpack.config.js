@@ -1,0 +1,48 @@
+var path = require('path')
+var webpack = require('webpack')
+
+module.exports = {
+  entry: {scroller:'./index.js',easyscroller:'./easyscroller.js'},
+  output: {
+    path: path.resolve(__dirname, './dist'), publicPath: '/dist/',
+    library: 'scroller',
+    libraryTarget: 'umd',
+    filename: '[name].js'
+  },
+  resolveLoader: {
+    root: path.join(__dirname, 'node_modules'),
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
+  },
+  devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+     // new webpack.IgnorePlugin(/jquery$/),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
+  ])
+}
